@@ -22,6 +22,19 @@
 
 ---
 
+## Configuración de i3status
+
+1. **Copiar archivo de configuración**  
+   Copia el archivo de configuración a la ruta del sistema:
+   ```bash
+   sudo cp i3status.conf /etc/i3/i3status.conf
+   ```
+
+2. **Editar el archivo si es necesario**  
+   Puedes personalizar los módulos y la información que muestra editando `/etc/i3/i3status.conf`.
+
+---
+
 ## Activar configuración de control manual de ventilador (ThinkPad)
 
 1. **Habilitar control manual**  
