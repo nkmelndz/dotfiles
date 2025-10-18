@@ -180,7 +180,7 @@ bar {
 for_window [class="^.*"] border pixel 2
 
 #Wallpaper
-exec_always --no-startup-id feh --bg-scale ~/Pictures/wallpaper.jpg
+exec_always --no-startup-id feh --bg-scale ~/Imágenes/wallpaper.png
 
 gaps inner 1
 gaps outer 1

@@ -1,0 +1,13 @@
+[Unit]
+Description=Configurar nivel del ventilador con retardo
+After=suspend.target hibernate.target multi-user.target graphical.target
+
+[Service]
+Type=oneshot
+ExecStartPre=/bin/sleep 10
+ExecStart=/bin/sh -c 'echo "level 1" > /proc/acpi/ibm/fan'
+
+[Install]
+WantedBy=multi-user.target suspend.target hibernate.target
+
+

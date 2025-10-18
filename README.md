@@ -1,44 +1,54 @@
+# Dotfiles y configuración
 
-# Activar configuración de control manual de ventilador
+## Configuración de i3wm
 
-```bash
-echo 'options thinkpad_acpi fan_control=1' | sudo tee -a /etc/modprobe.d/thinkpad_acpi.conf
-````
+1. **Instalar i3wm**  
+   ```bash
+   sudo apt update
+   sudo apt install i3
+   ```
 
----
+2. **Copiar archivos de configuración**  
+   Copia el archivo `i3/config` a tu carpeta de configuración:
+   ```bash
+   mkdir -p ~/.config/i3
+   cp i3/config ~/.config/i3/config
+   ```
 
-## Servicio systemd
-
-(Mejor opción si quieres que se ejecute al arrancar del sistema)
-
-### 1. Crear un servicio
-
-```bash
-sudo nano /etc/systemd/system/fan-control.service
-```
-
-**Contenido del servicio:**
-
-```bash
-[Unit]
-Description=Set fan speed to level 2
-After=multi-user.target
-
-[Service]
-Type=oneshot
-ExecStart=/bin/bash -c 'echo "level 2" > /proc/acpi/ibm/fan'
-
-[Install]
-WantedBy=multi-user.target
-```
+3. **Instalar utilidades recomendadas**  
+   ```bash
+   sudo apt install i3status i3lock dmenu
+   ```
 
 ---
 
-### 2. Habilitar el servicio
+## Activar configuración de control manual de ventilador (ThinkPad)
 
-```bash
-sudo systemctl enable fan-control.service
-sudo systemctl start fan-control.service
-```
+1. **Habilitar control manual**  
+   Agrega la opción al archivo de configuración del módulo:
+   ```bash
+   echo 'options thinkpad_acpi fan_control=1' | sudo tee /etc/modprobe.d/thinkpad_acpi.conf
+   ```
 
+2. **Recargar el módulo**  
+   ```bash
+   sudo modprobe -r thinkpad_acpi
+   sudo modprobe thinkpad_acpi
+   ```
 
+---
+
+## Servicio systemd para control de ventilador
+
+(Mejor opción si quieres que se ejecute al arrancar el sistema)
+
+1. **Crear el servicio**  
+   ```bash
+   sudo cp fan-control.service /etc/systemd/system/fan-control.service
+   ```
+
+2. **Habilitar y arrancar el servicio**  
+   ```bash
+   sudo systemctl enable fan-control.service
+   sudo systemctl start fan-control.service
+   ```
